@@ -1,6 +1,4 @@
-import 'package:miofeed/models/rss.dart';
 import 'package:miofeed/models/universal_feed.dart';
-import 'package:miofeed/models/universal_item.dart';
 import 'package:miofeed/utils/rss/rss_cache.dart';
 
 class RssUtils {
