@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:miofeed/controllers/home_controller.dart';
 import 'package:miofeed/controllers/navigator_controller.dart';
 import 'package:miofeed/models/universal_item.dart';
 import 'package:miofeed/utils/after_layout.dart';
 
+import '../utils/rss/rss_utils.dart';
 import 'models/navigation_bar.dart';
 
 class HomeUI extends StatelessWidget {
@@ -15,7 +15,7 @@ class HomeUI extends StatelessWidget {
   final contentRegExp = RegExp(r'<[^>]*>|&[^;]+;');
 
   final NavigatorController nctr = Get.put(NavigatorController());
-  final HomeController hctr = Get.put(HomeController());
+  final _HomeController hctr = Get.put(_HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -103,5 +103,13 @@ class HomeUI extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class _HomeController extends GetxController {
+  var allParagraph = [].obs;
+
+  load() {
+    allParagraph.value = RssUtils.allRssParagraph;
   }
 }

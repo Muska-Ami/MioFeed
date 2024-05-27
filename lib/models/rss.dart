@@ -23,6 +23,8 @@ class RSS {
         autoUpdate = json['auto_update'];
 
   Map<String, dynamic> toJson() => {
+        "name": name,
+        "show_name": showName,
         "subscribe_url": subscribeUrl,
         'type': type,
         'auto_update': autoUpdate,
