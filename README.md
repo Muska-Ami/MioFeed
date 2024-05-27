@@ -1,4 +1,4 @@
-# miofeed
+# MioFeed
 
 MioFeed - Modern RSS reader
 

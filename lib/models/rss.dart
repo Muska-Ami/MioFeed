@@ -5,6 +5,7 @@ class RSS {
     required this.subscribeUrl,
     required this.type,
     required this.autoUpdate,
+    this.data = null,
   });
 
   final String name;
@@ -12,6 +13,7 @@ class RSS {
   final String subscribeUrl;
   final int type;
   final bool autoUpdate;
+  dynamic data;
 
   RSS.fromJson(Map<String, dynamic> json)
       : name = json['name'],
