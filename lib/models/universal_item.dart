@@ -2,6 +2,7 @@ import 'generator.dart';
 
 class UniversalItem {
   UniversalItem({
+    required this.title,
     required this.authors,
     this.categories,
     required this.contributors,
@@ -12,6 +13,7 @@ class UniversalItem {
     required this.content,
   });
 
+  final String title;
   final List<String> authors;
   final List<String>? categories;
   final List<String> contributors;
