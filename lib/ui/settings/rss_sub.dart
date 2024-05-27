@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../models/navigation_bar.dart';
 
 late BuildContext _context;
+late var _setInfoDialog;
 
 class RssSubSettingUI extends StatefulWidget {
   RssSubSettingUI({super.key, required this.title});
@@ -39,6 +40,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
   @override
   Widget build(BuildContext context) {
     _context = context;
+    _setInfoDialog = setInfoDialog;
     rsctr.load();
     return Scaffold(
       appBar: AppBar(
@@ -51,76 +53,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
               leading: Icon(Icons.add),
               title: Text('添加新订阅...'),
             ),
-            onTap: () async {
-              //TODO: Add RSS sub
-              Get.dialog(AlertDialog(
-                title: Text('添加订阅'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      title: Text("订阅链接"),
-                      subtitle: TextField(
-                        controller: rssSubLinkTextController,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text("订阅名"),
-                      subtitle: TextField(
-                        controller: rssSubNameController,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text("显示名称"),
-                      subtitle: TextField(
-                        controller: rssSubShowNameController,
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () async => Get.close(0),
-                    child: Text('取消'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (rssSubLinkTextController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("请输入订阅链接"),
-                          ),
-                        );
-                      } else if (rssSubNameController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("请输入订阅名"),
-                          ),
-                        );
-                      } else {
-                        RssStorage()
-                            .setRss(
-                              rssSubNameController.text,
-                              RSS(
-                                name: rssSubNameController.text,
-                                showName:
-                                    rssSubShowNameController.text.isNotEmpty
-                                        ? rssSubShowNameController.text
-                                        : rssSubNameController.text,
-                                subscribeUrl: rssSubLinkTextController.text,
-                                type: 0,
-                                autoUpdate: true,
-                              ),
-                            )
-                            .then((v) => rsctr.load());
-                        Get.close(0);
-                      }
-                    },
-                    child: Text('确定'),
-                  ),
-                ],
-              ));
-            },
+            onTap: () async => Get.dialog(setInfoDialog()),
           ),
           const Divider(),
           Expanded(
@@ -141,6 +74,86 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
       bottomNavigationBar: NavigationBarX().build(),
     );
   }
+
+  AlertDialog setInfoDialog({
+    String? name = null,
+    String? showName = null,
+    String? link = null,
+    bool twiceClose = false,
+  }) {
+    if (name != null) rssSubNameController.text = name;
+    if (showName != null) rssSubShowNameController.text = showName;
+    if (link != null) rssSubLinkTextController.text = link;
+    return AlertDialog(
+      title: Text('订阅'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            title: Text("订阅链接"),
+            subtitle: TextField(
+              controller: rssSubLinkTextController,
+            ),
+          ),
+          name == null
+              ? ListTile(
+                  title: Text("订阅名"),
+                  subtitle: TextField(
+                    controller: rssSubNameController,
+                  ),
+                )
+              : Container(),
+          ListTile(
+            title: Text("显示名称"),
+            subtitle: TextField(
+              controller: rssSubShowNameController,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () async => Get.close(0),
+          child: Text('取消'),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            if (rssSubLinkTextController.text.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("请输入订阅链接"),
+                ),
+              );
+            } else if (name == null && rssSubNameController.text.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("请输入订阅名"),
+                ),
+              );
+            } else {
+              RssStorage()
+                  .setRss(
+                    rssSubNameController.text,
+                    RSS(
+                      name: name ?? rssSubNameController.text,
+                      showName: rssSubShowNameController.text.isNotEmpty
+                          ? rssSubShowNameController.text
+                          : rssSubNameController.text,
+                      subscribeUrl: rssSubLinkTextController.text,
+                      type: 0,
+                      autoUpdate: true,
+                    ),
+                  )
+                  .then((v) => rsctr.load());
+              Get.close(0);
+              if (twiceClose) Get.close(0);
+            }
+          },
+          child: Text('确定'),
+        ),
+      ],
+    );
+  }
 }
 
 class _RssSubController extends GetxController {
@@ -157,7 +170,7 @@ class _RssSubController extends GetxController {
     } else {
       subListWidgets.clear();
       for (String key in rssList) {
-        print(key);
+        // print(key);
         RSS data = await RssStorage().getRss(key);
         var uuid = Uuid();
         subListWidgets.add(
@@ -174,7 +187,12 @@ class _RssSubController extends GetxController {
                   children: [
                     SimpleDialogOption(
                       child: Text('更新信息'),
-                      onPressed: () {},
+                      onPressed: () async => Get.dialog(_setInfoDialog(
+                        name: data.name,
+                        showName: data.showName,
+                        link: data.subscribeUrl,
+                        twiceClose: true,
+                      )),
                     ),
                   ],
                 ));
