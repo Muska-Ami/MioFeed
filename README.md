@@ -1,5 +1,8 @@
 # MioFeed
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/404d940000b04e148567f8227949bc0f)](https://app.codacy.com/gh/Muska-Ami/MioFeed/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed?ref=badge_shield&issueType=license)
+
 MioFeed - Modern RSS reader
 
 ## 开发计划
@@ -17,3 +20,5 @@ MioFeed - Modern RSS reader
   - [ ] 获取订阅
   - [ ] 主题功能
   - [ ] 订阅分组
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed?ref=badge_large&issueType=license)
