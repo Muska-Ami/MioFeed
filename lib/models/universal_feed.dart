@@ -21,5 +21,5 @@ class UniversalFeed {
   final String copyright;
   final List<String>? categories;
   final DateTime date;
-  final UniversalItem item;
+  final List<UniversalItem> item;
 }

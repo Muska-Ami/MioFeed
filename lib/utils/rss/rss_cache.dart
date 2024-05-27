@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:miofeed/models/rss.dart';
+import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/utils/shared_data.dart';
 
 class RssCache {
 
-  static final List<RSS> rss_list = [];
+  static final List<Map<String, dynamic>> rssList = [];
 
   /// 缓存一个RSS订阅
   static Future<void> save(RSS rss, String data) async => await File('${SharedData.documentPath}/${rss.name}/cache.xml').writeAsString(data);
@@ -17,7 +18,10 @@ class RssCache {
     }
   }
 
-  static Future<void> toMemCache(RSS rss) async => rss_list.add(rss);
-  static Future<void> removeMemCache(RSS rss) async => rss_list.remove(rss);
-  static get rssMemCache => rss_list;
+  static Future<void> toMemCache(RSS rss, UniversalFeed feed) async => rssList.add({
+    'sub': rss,
+    'data': feed,
+  });
+  static Future<void> removeMemCache(rss) async => rssList.remove(rss);
+  static get rssMemCache => rssList;
 }
