@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../models/navigation_bar.dart';
 
@@ -22,6 +23,17 @@ class RssSubSettingUI extends StatelessWidget {
             ),
             onTap: () async {
               //TODO: Add RSS sub
+              Get.dialog(AlertDialog(
+                title: Text('添加订阅'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      leading: Text("订阅链接"),
+                    ),
+                  ],
+                ),
+              ));
             },
           ),
           const Divider(),
