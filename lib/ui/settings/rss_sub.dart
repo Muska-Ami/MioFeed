@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/models/rss.dart';
 import 'package:miofeed/utils/rss/rss_storage.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/navigation_bar.dart';
+
+late BuildContext _context;
 
 class RssSubSettingUI extends StatefulWidget {
   RssSubSettingUI({super.key, required this.title});
@@ -35,6 +38,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     rsctr.load();
     return Scaffold(
       appBar: AppBar(
@@ -155,14 +159,46 @@ class _RssSubController extends GetxController {
       for (String key in rssList) {
         print(key);
         RSS data = await RssStorage().getRss(key);
+        var uuid = Uuid();
         subListWidgets.add(
-          ListTile(
-            title: Text('${data.showName} (${data.name})'),
-            subtitle: Text(data.subscribeUrl),
+          Dismissible(
+            key: Key('${uuid.v8()}@${data.name}'),
+            child: InkWell(
+              child: ListTile(
+                title: Text('${data.showName} (${data.name})'),
+                subtitle: Text(data.subscribeUrl),
+              ),
+              onTap: () async {
+                Get.dialog(SimpleDialog(
+                  title: Text('操作'),
+                  children: [
+                    SimpleDialogOption(
+                      child: Text('更新信息'),
+                      onPressed: () {},
+                    ),
+                  ],
+                ));
+              },
+            ),
+            onDismissed: (direction) {
+              RssStorage().removeRss(data.name);
+              ScaffoldMessenger.of(_context).showSnackBar(
+                SnackBar(
+                  content: Text('已删除'),
+                ),
+              );
+            },
+            background: Container(
+              color: Colors.red,
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+            ),
           ),
         );
-        subListWidgets.refresh();
       }
+      subListWidgets.refresh();
     }
   }
 }
