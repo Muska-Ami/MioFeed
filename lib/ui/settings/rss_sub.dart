@@ -1,6 +1,8 @@
+import 'package:dart_rss/dart_rss.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/models/rss.dart';
+import 'package:miofeed/utils/network/get_rss.dart';
 import 'package:miofeed/utils/rss/rss_storage.dart';
 import 'package:uuid/uuid.dart';
 
@@ -145,6 +147,8 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
                     ),
                   )
                   .then((v) => rsctr.load());
+              final res = await NetworkGetRss().get(rssSubLinkTextController.text);
+              
               Get.close(0);
               if (twiceClose) Get.close(0);
             }
@@ -153,6 +157,17 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
         ),
       ],
     );
+  }
+  
+  _parse(String data, int type) {
+    switch (type) {
+      case 0:
+        return AtomFeed.parse(data);
+      case 1:
+        return Rss1Feed.parse(data);
+      case 2:
+        return RssFeed.parse(data);
+    }
   }
 }
 

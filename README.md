@@ -21,4 +21,8 @@ MioFeed - Modern RSS reader
   - [ ] 主题功能
   - [ ] 订阅分组
 
+## For developers
+
+- int type [0...2] => [Atom, RSS1, RSS2]
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FMuska-Ami%2FMioFeed?ref=badge_large&issueType=license)
