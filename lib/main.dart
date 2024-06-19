@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miofeed/controllers/progressbar_controller.dart';
 import 'package:miofeed/ui/home.dart';
 import 'package:miofeed/ui/settings.dart';
 import 'package:miofeed/ui/settings/rss_sub.dart';
@@ -19,12 +20,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put(ProgressbarController());
     return GetMaterialApp(
       title: 'MioFeed',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blueAccent
-      ),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blueAccent),
       routes: {
         '/home': (context) => HomeUI(title: title),
         '/settings': (context) => SettingsUI(title: title),

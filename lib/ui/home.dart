@@ -4,6 +4,7 @@ import 'package:miofeed/controllers/navigator_controller.dart';
 import 'package:miofeed/models/universal_item.dart';
 import 'package:miofeed/utils/after_layout.dart';
 
+import '../controllers/progressbar_controller.dart';
 import '../utils/rss/rss_utils.dart';
 import 'models/navigation_bar.dart';
 
@@ -16,6 +17,7 @@ class HomeUI extends StatelessWidget {
 
   final NavigatorController nctr = Get.put(NavigatorController());
   final _HomeController hctr = Get.put(_HomeController());
+  final ProgressbarController progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,14 @@ class HomeUI extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(title),
+        bottom: PreferredSize(
+          preferredSize: Size(MediaQuery.of(context).size.width, 3),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 3,
+            child: Obx(() => progressbar.widget.value),
+          ),
+        ),
       ),
       body: AfterLayout(
         callback: (RenderAfterLayout ral) {

@@ -8,9 +8,12 @@ class RssCache {
   static final List<Map<String, dynamic>> rssList = [];
 
   /// 缓存一个RSS订阅
-  static Future<void> save(RSS rss, String data) async =>
-      await File('${SharedData.documentPath}/${rss.name}/cache.xml')
-          .writeAsString(data);
+  static Future<void> save(RSS rss, String data) async {
+    final dir = Directory('${SharedData.documentPath}/${rss.name}');
+    if (!(await dir.exists())) await dir.create();
+    await File('${SharedData.documentPath}/${rss.name}/cache.xml')
+        .writeAsString(data);
+  }
 
   /// 清除一个RSS订阅缓存
   static Future<void> delete(RSS rss) async {
