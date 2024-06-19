@@ -204,8 +204,18 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
             RssStorage()
                 .setRss(rssSubNameController.text, rss)
                 .then((v) => rsctr.load());
-            final res =
-                await NetworkGetRss().get(rssSubLinkTextController.text);
+            final res;
+            try {
+              res = await NetworkGetRss().get(rssSubLinkTextController.text);
+            } catch (e, s) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("无法请求订阅，请检查订阅链接是否正确或重试！"),
+                ),
+              );
+              progressbar.finish();
+              return;
+            }
             //print(res);
             late final parsed;
             try {
@@ -216,6 +226,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
                   content: Text("解析订阅失败，可能订阅类型有误，请重试！"),
                 ),
               );
+              progressbar.finish();
               return;
             }
             // print(parsed);

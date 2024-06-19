@@ -10,6 +10,7 @@ import 'package:miofeed/utils/shared_data.dart';
 const String title = "MioFeed";
 
 void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
   await SharedData.init();
   runApp(const MyApp());
 }
