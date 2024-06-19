@@ -301,6 +301,7 @@ class _RssSubController extends GetxController {
             ),
             onDismissed: (direction) {
               RssStorage().removeRss(data.name);
+              RssCache.deleteAll(data);
               ScaffoldMessenger.of(_context).showSnackBar(
                 SnackBar(
                   content: Text('已删除'),

@@ -20,13 +20,13 @@ class SettingsUI extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text(title),
         bottom: PreferredSize(
-        preferredSize: Size(MediaQuery.of(context).size.width, 3),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 3,
-          child: Obx(() => progressbar.widget.value),
+          preferredSize: Size(MediaQuery.of(context).size.width, 3),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 3,
+            child: Obx(() => progressbar.widget.value),
+          ),
         ),
-      ),
       ),
       body: ListView(
         children: [

@@ -17,13 +17,13 @@ class ThemeSettingUI extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         bottom: PreferredSize(
-        preferredSize: Size(MediaQuery.of(context).size.width, 3),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 3,
-          child: Obx(() => progressbar.widget.value),
+          preferredSize: Size(MediaQuery.of(context).size.width, 3),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 3,
+            child: Obx(() => progressbar.widget.value),
+          ),
         ),
-      ),
       ),
       body: Center(
         child: Text('test'),

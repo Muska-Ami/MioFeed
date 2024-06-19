@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 
 class NetworkGetRss {
-
   Future<String> get(subUrl) async {
     final instance = Dio();
 
@@ -9,5 +8,4 @@ class NetworkGetRss {
     String resFeed = res.data;
     return resFeed;
   }
-
 }
