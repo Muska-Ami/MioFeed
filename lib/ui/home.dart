@@ -16,11 +16,12 @@ class HomeUI extends StatelessWidget {
   final contentRegExp = RegExp(r'<[^>]*>|&[^;]+;');
 
   final NavigatorController nctr = Get.put(NavigatorController());
-  final _HomeController hctr = Get.put(_HomeController());
   final ProgressbarController progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    final _HomeController hctr = Get.put(_HomeController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -41,7 +42,7 @@ class HomeUI extends StatelessWidget {
         child: hctr.allParagraph.isNotEmpty
             ? Obx(
                 () => Container(
-                  margin: const EdgeInsets.all(15),
+                  margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: ListView.builder(
                     itemCount: hctr.allParagraph.length,
                     itemBuilder: (context, index) {

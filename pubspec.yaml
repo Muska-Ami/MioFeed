@@ -110,6 +110,14 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+      - family: Microsoft YaHei
+        fonts:
+            - asset: fonts/msyh.ttc
+            - asset: fonts/msyhbd.ttc
+              weight: 700
+            - asset: fonts/msyhl.ttc
+              weight: 200
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

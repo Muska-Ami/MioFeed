@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
     Get.put(ProgressbarController());
     return GetMaterialApp(
       title: 'MioFeed',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blueAccent),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blueAccent,
+        fontFamily: 'Microsoft YaHei',
+      ),
       routes: {
         '/home': (context) => HomeUI(title: title),
         '/settings': (context) => SettingsUI(title: title),
