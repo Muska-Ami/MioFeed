@@ -1,9 +1,9 @@
 import 'package:dart_rss/dart_rss.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/controllers/progressbar_controller.dart';
 import 'package:miofeed/models/rss.dart';
+import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/utils/network/get_rss.dart';
 import 'package:miofeed/utils/rss/rss_cache.dart';
 import 'package:miofeed/utils/rss/rss_storage.dart';
@@ -223,20 +223,39 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 return;
               }
               //print(res);
-              // late final parsed;
+              late final UniversalFeed parsed;
               try {
-                _parse(res, type);
+                final data = _parse(res, type);
+                if (data is AtomFeed) {
+                  parsed = UniversalFeed.fromAtom(data);
+                } else if (data is RssFeed) {
+                  parsed = UniversalFeed.fromRss(data);
+                } else if (data is Rss1Feed) {
+                  parsed = UniversalFeed.fromRss1(data);
+                }
               } catch (e, s) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("解析订阅失败，可能订阅类型有误，请重试！"),
                   ),
                 );
+                print(e);
+                print(s);
                 progressbar.finish();
                 return;
               }
               // print(parsed);
               RssCache.save(rss, res);
+              RssCache.toMemCache(rss, UniversalFeed(
+                title: parsed.title,
+                author: parsed.author,
+                description: parsed.description,
+                icon: parsed.icon,
+                link: parsed.link,
+                copyright: parsed.copyright,
+                date: parsed.date,
+                item: parsed.item,
+              ));
               progressbar.finish();
               Get.back(result: true);
               // Get.close(0);

@@ -47,30 +47,30 @@ class HomeUI extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final para = hctr.allParagraph[index];
                       final UniversalItem paraData = para['item'];
+
+                      final paraDesc = paraData.content.replaceAll(
+                        contentRegExp,
+                        ' ',
+                      ).trim();
+
                       return Card(
                         child: Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 paraData.title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.all(10),
-                                child: Text(paraData.content.length < 320
-                                    ? paraData.content.replaceAll(
-                                        contentRegExp,
-                                        ' ',
-                                      )
-                                    : '${paraData.content.replaceAll(
-                                          contentRegExp,
-                                          ' ',
-                                        ).substring(0, 320)}......'),
+                                margin: const EdgeInsets.all(10),
+                                child: Text(paraDesc.length <= 320
+                                    ? paraDesc
+                                    : '${paraDesc.substring(0, 320)}......'),
                               ),
                               _buildLabels(paraData.categories ?? []),
                             ],
@@ -81,7 +81,7 @@ class HomeUI extends StatelessWidget {
                   ),
                 ),
               )
-            : Center(
+            : const Center(
                 child: Text('空空如也 ￣△￣'),
               ),
       ),
@@ -94,11 +94,11 @@ class HomeUI extends StatelessWidget {
     for (var label in data) {
       labels += ' | $label';
     }
-    labels = labels.substring(3, labels.length);
+    labels = labels.length > 3 ? labels.substring(3, labels.length) : labels;
     return Row(
       children: [
         Container(
-          margin: EdgeInsets.only(right: 5),
+          margin: const EdgeInsets.only(right: 5),
           child: Icon(
             color: Get.theme.disabledColor,
             Icons.category,
