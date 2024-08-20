@@ -34,12 +34,12 @@ class RssUtils {
       // }
     ];
     final fullData = RssCache.rssMemCache;
-    for (Map<String, dynamic> data in fullData) {
-      UniversalFeed feed = data['feed'];
+    for (var data in fullData) {
+      UniversalFeed feed = data['data'];
       for (var item in feed.item) {
         Map<String, dynamic> paragraph = {
           'item': item,
-          'feed_origin': fullData['sub'],
+          'feed_origin': data['sub'],
           'feed_data': feed,
         };
         paragraphList.add(paragraph);
