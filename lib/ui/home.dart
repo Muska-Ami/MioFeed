@@ -14,8 +14,6 @@ class HomeUI extends StatelessWidget {
 
   final String title;
 
-  final contentRegExp = RegExp(r'<[^>]*>|&[^;]+;');
-
   final NavigatorController nctr = Get.put(NavigatorController());
   final ProgressbarController progressbar = Get.find();
 
@@ -51,10 +49,9 @@ class HomeUI extends StatelessWidget {
                       final UniversalItem paraData = para['item'];
 
                       final paraDesc = paraData.content
-                          .replaceAll(
-                            contentRegExp,
-                            ' ',
-                          )
+                          .replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), ' ')
+                          .replaceAll(RegExp(r'\n{2,}'), ' ')
+                          .replaceAll(RegExp(r' {2,}'), ' ')
                           .trim();
 
                       return InkWell(
