@@ -7,6 +7,7 @@ import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/utils/network/get_rss.dart';
 import 'package:miofeed/utils/rss/rss_cache.dart';
 import 'package:miofeed/utils/rss/rss_storage.dart';
+import 'package:flutter/services.dart';
 
 class RssSubNewUI extends StatefulWidget {
   const RssSubNewUI({
@@ -90,6 +91,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                       title: const Text("订阅名"),
                       subtitle: TextField(
                         controller: rssSubNameController,
+                        inputFormatters: [_LowercaseAndDashFormatter()],
                       ),
                     )
                   : Container(),
@@ -290,5 +292,17 @@ class _RssSubNewState extends State<RssSubNewUI> {
       case 2:
         return RssFeed.parse(data);
     }
+  }
+}
+
+class _LowercaseAndDashFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    // 使用正则表达式只允许小写字母和连字符
+    final newText = newValue.text.replaceAll(RegExp('[^a-z0-9-]'), '');
+    return newValue.copyWith(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+    );
   }
 }
