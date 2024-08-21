@@ -187,6 +187,6 @@ class UniversalFeed {
         // ignored
       }
     }
-    return DateTime(1970, 1, 1);
+    return null;
   }
 }
