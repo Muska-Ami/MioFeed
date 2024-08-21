@@ -228,6 +228,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 final data = _parse(res, type);
                 if (data is AtomFeed) {
                   parsed = UniversalFeed.fromAtom(data);
+                  // print(data.items.first.links.first.href);
                 } else if (data is RssFeed) {
                   parsed = UniversalFeed.fromRss(data);
                 } else if (data is Rss1Feed) {

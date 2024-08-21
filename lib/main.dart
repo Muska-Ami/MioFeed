@@ -32,6 +32,13 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.blueAccent,
         fontFamily: 'Microsoft YaHei',
       ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.blueAccent,
+        fontFamily: 'Microsoft YaHei',
+      ),
+      themeMode: ThemeMode.system,
       routes: {
         '/home': (context) => HomeUI(title: title),
         '/settings': (context) => SettingsUI(title: title),

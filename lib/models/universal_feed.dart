@@ -31,7 +31,7 @@ class UniversalFeed {
         author = _atomToUniversalPersonList(atom.authors),
         description = '没有介绍',
         icon = atom.logo ?? '',
-        link = '',//atom.links,
+        link = atom.links.first.href ?? '',//atom.links,
         copyright = atom.rights ?? '',
         categories = _atomToStringCategories(atom.categories),
         date = atom.updated != null ? DateTime.parse(atom.updated!) : null,
@@ -105,6 +105,7 @@ class UniversalFeed {
           }
 
           universal.add(UniversalItem(
+            link: item.links.first.href,
             title: item.title ?? '未知',
             authors: authors,
             contributors: contributors,
@@ -116,6 +117,7 @@ class UniversalFeed {
           ));
         }
         break;
+        // TODO: Finish translate
       case 1:
         final List<Rss1Item> itemsList = items as List<Rss1Item>;
         break;
