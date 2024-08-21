@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/controllers/progressbar_controller.dart';
 import 'package:miofeed/ui/home.dart';
+import 'package:miofeed/ui/paragraph.dart';
 import 'package:miofeed/ui/settings.dart';
 import 'package:miofeed/ui/settings/rss_sub.dart';
 import 'package:miofeed/ui/settings/theme.dart';
+import 'package:miofeed/utils/rss/rss_cache.dart';
 import 'package:miofeed/utils/shared_data.dart';
 
 const String title = "MioFeed";
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await SharedData.init();
+  await RssCache.readAllToRemCache();
   runApp(const MyApp());
 }
 
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => HomeUI(title: title),
         '/settings': (context) => SettingsUI(title: title),
-        '/settings/rss_sub': (context) => RssSubSettingUI(title: title),
+        '/settings/rss_sub': (context) => const RssSubSettingUI(title: title),
         '/settings/theme': (context) => ThemeSettingUI(title: title),
       },
       home: HomeUI(title: title),

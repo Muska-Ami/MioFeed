@@ -1,4 +1,4 @@
-package moe.muska.ami.miofeed.miofeed
+package moe.muska.ami.miofeed
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/controllers/navigator_controller.dart';
 import 'package:miofeed/models/universal_item.dart';
+import 'package:miofeed/ui/paragraph.dart';
 import 'package:miofeed/utils/after_layout.dart';
 
 import '../controllers/progressbar_controller.dart';
@@ -35,13 +36,13 @@ class HomeUI extends StatelessWidget {
           ),
         ),
       ),
-      body: AfterLayout(
-        callback: (RenderAfterLayout ral) {
-          hctr.load();
-        },
-        child: hctr.allParagraph.isNotEmpty
-            ? Obx(
-                () => Container(
+      body: Obx(
+        () => AfterLayout(
+          callback: (RenderAfterLayout ral) {
+            hctr.load();
+          },
+          child: hctr.allParagraph.isNotEmpty
+              ? Container(
                   margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: ListView.builder(
                     itemCount: hctr.allParagraph.length,
@@ -49,42 +50,49 @@ class HomeUI extends StatelessWidget {
                       final para = hctr.allParagraph[index];
                       final UniversalItem paraData = para['item'];
 
-                      final paraDesc = paraData.content.replaceAll(
-                        contentRegExp,
-                        ' ',
-                      ).trim();
+                      final paraDesc = paraData.content
+                          .replaceAll(
+                            contentRegExp,
+                            ' ',
+                          )
+                          .trim();
 
-                      return Card(
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                paraData.title,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                      return InkWell(
+                        onTap: () async {
+                          Get.to(() => ParagraphUI(data: paraData));
+                        },
+                        child: Card(
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  paraData.title,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.all(10),
-                                child: Text(paraDesc.length <= 320
-                                    ? paraDesc
-                                    : '${paraDesc.substring(0, 320)}......'),
-                              ),
-                              _buildLabels(paraData.categories ?? []),
-                            ],
+                                Container(
+                                  margin: const EdgeInsets.all(10),
+                                  child: Text(paraDesc.length <= 320
+                                      ? paraDesc
+                                      : '${paraDesc.substring(0, 320)}......'),
+                                ),
+                                _buildLabels(paraData.categories ?? []),
+                              ],
+                            ),
                           ),
                         ),
                       );
                     },
                   ),
+                )
+              : const Center(
+                  child: Text('空空如也 ￣△￣'),
                 ),
-              )
-            : const Center(
-                child: Text('空空如也 ￣△￣'),
-              ),
+        ),
       ),
       bottomNavigationBar: NavigationBarX().build(),
     );

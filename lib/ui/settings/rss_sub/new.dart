@@ -239,8 +239,6 @@ class _RssSubNewState extends State<RssSubNewUI> {
                     content: Text("解析订阅失败，可能订阅类型有误，请重试！"),
                   ),
                 );
-                print(e);
-                print(s);
                 progressbar.finish();
                 return;
               }

@@ -8,8 +8,8 @@ class UniversalItem {
     required this.contributors,
     this.generator,
     this.link,
-    this.publish_time,
-    this.update_time,
+    this.publishTime,
+    this.updateTime,
     required this.content,
   });
 
@@ -19,7 +19,7 @@ class UniversalItem {
   final List<String> contributors;
   final Generator? generator;
   final String? link;
-  final DateTime? publish_time;
-  final DateTime? update_time;
+  final DateTime? publishTime;
+  final DateTime? updateTime;
   final String content;
 }

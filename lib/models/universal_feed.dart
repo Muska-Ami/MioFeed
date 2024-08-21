@@ -108,9 +108,9 @@ class UniversalFeed {
             title: item.title ?? '未知',
             authors: authors,
             contributors: contributors,
-            publish_time:
+            publishTime:
                 item.published != null ? DateTime.parse(item.published!) : null,
-            update_time:
+            updateTime:
                 item.updated != null ? DateTime.parse(item.updated!) : null,
             content: item.content ?? '无内容',
           ));

@@ -12,7 +12,7 @@ MioFeed - Modern RSS reader
 - [x] RSS1.0 Feed 支持
 - 本体
   - [x] 文章获取
-  - [ ] 文章渲染
+  - [x] 文章渲染
   - [x] 首页文章渲染
   - [x] 添加订阅
   - [x] 更新订阅
@@ -20,6 +20,10 @@ MioFeed - Modern RSS reader
   - [x] 获取订阅
   - [ ] 主题功能
   - [ ] 订阅分组
+
+## 一些已知问题
+
+- 回调数据没有被正确转为 UniversalFeed
 
 ## For developers
 

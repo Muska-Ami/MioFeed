@@ -8,7 +8,7 @@
 PRODUCT_NAME = miofeed
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = moe.muska.ami.miofeed.miofeed
+PRODUCT_BUNDLE_IDENTIFIER = moe.muska.ami.miofeed
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 moe.muska.ami.miofeed. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 moe.muska.ami. All rights reserved.

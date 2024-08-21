@@ -41,6 +41,8 @@ dependencies:
   shared_preferences: ^2.2.3
   dio: ^5.4.3+1
   uuid: ^4.4.0
+  flutter_widget_from_html: ^0.14.11
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
