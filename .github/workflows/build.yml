@@ -114,27 +114,29 @@ jobs:
         with:
           name: MacOS Artifact
           path: build
-  
-  ios:
-    runs-on: macos-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-      - name: Setup Flutter
-        uses: flutter-actions/setup-flutter@v3
-        with:
-          channel: 'stable'
-          version: 3.24.1
-          cache-sdk: true
+## So, fku Apple and iOS
 
-      - name: Build
-        run: flutter build ipa
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: iOS Artifact
-          path: build
+#  ios:
+#    runs-on: macos-latest
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#        with:
+#          submodules: true
+#      - name: Setup Flutter
+#        uses: flutter-actions/setup-flutter@v3
+#        with:
+#          channel: 'stable'
+#          version: 3.24.1
+#          cache-sdk: true
+#
+#      - name: Build
+#        run: flutter build ipa
+#
+#      - name: Upload Build Artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: iOS Artifact
+#          path: build
