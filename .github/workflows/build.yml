@@ -51,7 +51,7 @@ jobs:
       - name: Install Dependencies
         run: |-
           sudo apt update
-          sudo apt install libgtk-3-0 libblkid1 liblzma5
+          sudo apt-get install clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev patchelf locate libfuse2
 
       - name: Build
         run: flutter build linux
@@ -63,7 +63,7 @@ jobs:
           path: build
 
   android:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
@@ -76,6 +76,11 @@ jobs:
           channel: 'stable'
           version: 3.24.1
           cache-sdk: true
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Build
         run: flutter build apk
