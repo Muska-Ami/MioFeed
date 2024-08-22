@@ -7,8 +7,6 @@ name: Build
 
 on:
   push:
-    branches:
-      - dev
 
 jobs:
   windows:
