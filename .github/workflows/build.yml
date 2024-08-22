@@ -1,0 +1,132 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: 'stable'
+          version: 3.24.1
+          cache-sdk: true
+
+      - name: Build
+        run: flutter build windows
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Artifact
+          path: build
+
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: 'stable'
+          version: 3.24.1
+          cache-sdk: true
+
+      - name: Build
+        run: flutter build linux
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux Artifact
+          path: build
+
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: 'stable'
+          version: 3.24.1
+          cache-sdk: true
+
+      - name: Build
+        run: flutter build apk
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android Artifact
+          path: build
+
+  macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: 'stable'
+          version: 3.24.1
+          cache-sdk: true
+
+      - name: Build
+        run: flutter build macos
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MacOS Artifact
+          path: build
+  
+  ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: 'stable'
+          version: 3.24.1
+          cache-sdk: true
+
+      - name: Build
+        run: flutter build ipa
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: iOS Artifact
+          path: build
