@@ -48,6 +48,9 @@ jobs:
           version: 3.24.1
           cache-sdk: true
 
+      - name: Install Dependencies
+        run: apt install libgtk-3-0 libblkid1 liblzma5
+
       - name: Build
         run: flutter build linux
 
