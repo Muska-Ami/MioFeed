@@ -1,3 +1,5 @@
+<img src="./icon.png" style="height: 300px;" alt="MioFeed"/>
+
 # MioFeed
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/404d940000b04e148567f8227949bc0f)](https://app.codacy.com/gh/Muska-Ami/MioFeed/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
