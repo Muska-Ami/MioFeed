@@ -1,5 +1,3 @@
-import 'package:miofeed/models/universal_feed.dart';
-
 import 'generator.dart';
 
 class UniversalItem {

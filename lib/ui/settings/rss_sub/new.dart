@@ -216,11 +216,16 @@ class _RssSubNewState extends State<RssSubNewUI> {
               try {
                 res = await NetworkGetRss().get(rssSubLinkTextController.text);
               } catch (e, s) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("无法请求订阅，请检查订阅链接是否正确或重试！"),
-                  ),
-                );
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          "无法请求订阅，请检查订阅链接是否正确或重试！"),
+                    ),
+                  );
+                }
+                print(e);
+                print(s);
                 progressbar.finish();
                 return;
               }

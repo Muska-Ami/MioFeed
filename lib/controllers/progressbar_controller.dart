@@ -6,6 +6,7 @@ class ProgressbarController extends GetxController {
 
   _updateWidget(bool loading) {
     if (loading)
+      // 不要修改，会炸
       widget.value = Container(
         child: LinearProgressIndicator(
           value: null,

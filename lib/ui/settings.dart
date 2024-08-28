@@ -48,6 +48,15 @@ class SettingsUI extends StatelessWidget {
               Get.toNamed('/settings/theme');
             },
           ),
+          InkWell(
+            child: const ListTile(
+              leading: Icon(Icons.view_in_ar),
+              title: Text("渲染设置"),
+            ),
+            onTap: () async {
+              Get.toNamed('/settings/render');
+            },
+          ),
         ],
       ),
       bottomNavigationBar: NavigationBarX().build(),

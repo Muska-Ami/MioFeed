@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 import '../../controllers/progressbar_controller.dart';
 import '../models/navigation_bar.dart';
 
-class ThemeSettingUI extends StatelessWidget {
-  ThemeSettingUI({super.key, required this.title});
+class RenderSettingUI extends StatelessWidget {
+  RenderSettingUI({super.key, required this.title});
 
   final String title;
 
   final ProgressbarController progressbar = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
