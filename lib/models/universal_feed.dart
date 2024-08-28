@@ -31,7 +31,7 @@ class UniversalFeed {
       : title = atom.title ?? '无标题',
         author = _atomToUniversalPersonList(atom.authors),
         description = '没有介绍',
-        icon = atom.logo ?? '',
+        icon = atom.icon ?? '',
         link = atom.links.first.href ?? '',//atom.links,
         copyright = atom.rights ?? '',
         categories = _atomToStringCategories(atom.categories),
@@ -51,7 +51,7 @@ class UniversalFeed {
       : title = rss.title ?? '无标题',
         author = [UniversalPerson(name: rss.author)],
         description = rss.description ?? '没有介绍',
-        icon = rss.image?.link ?? '',
+        icon = rss.image?.url ?? '',
         link = rss.link ?? '',
         copyright = rss.copyright ?? '没有版权信息',
         categories = _rssToStringCategories(rss.categories),
@@ -183,6 +183,12 @@ class UniversalFeed {
 
       try {
         return format.parse(formattedString, true);
+      } catch (ignored) {
+        // ignored
+      }
+    } else {
+      try {
+        return DateTime.parse(dateString);
       } catch (ignored) {
         // ignored
       }

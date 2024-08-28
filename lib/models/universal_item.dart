@@ -1,3 +1,5 @@
+import 'package:miofeed/models/universal_feed.dart';
+
 import 'generator.dart';
 
 class UniversalItem {
@@ -22,4 +24,9 @@ class UniversalItem {
   final DateTime? publishTime;
   final DateTime? updateTime;
   final String content;
+
+  @override
+  String toString() {
+    return title;
+  }
 }

@@ -3,21 +3,26 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:miofeed/controllers/progressbar_controller.dart';
 import 'package:miofeed/main.dart';
+import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/models/universal_item.dart';
 import 'package:miofeed/ui/models/navigation_bar.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/paragraph_utils.dart';
+
 class ParagraphUI extends StatelessWidget {
   ParagraphUI({
     super.key,
     // this.title,
     required this.data,
+    required this.parent,
   });
 
   // final title;
   final UniversalItem data;
+  final UniversalFeed parent;
 
   final ProgressbarController progressbar = Get.find();
 
@@ -47,6 +52,37 @@ class ParagraphUI extends StatelessWidget {
                 Text(
                   data.title,
                   style: const TextStyle(fontSize: 30),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: parent.icon.isNotEmpty
+                                ? Image.network(
+                                    parent.icon,
+                                    errorBuilder: (
+                                      context,
+                                      error,
+                                      stackTrace,
+                                    ) {
+                                      return ParagraphUtils.buildColorIcon(
+                                          parent.title);
+                                    },
+                                  )
+                                : ParagraphUtils.buildColorIcon(parent.title)),
+                      ),
+                    ),
+                    Text(
+                        '${parent.title} | ${data.publishTime != null ? dateFormatter.format(data.publishTime!) : '未知'}'),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
                 ),
                 Row(
                   children: [

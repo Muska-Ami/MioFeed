@@ -247,6 +247,7 @@ class _RssSubController extends GetxController {
         RSS data = await RssStorage().getRss(key);
         var uuid = const Uuid();
         subListWidgets.add(
+          // 手势
           Dismissible(
             key: Key('${uuid.v8()}@${data.name}'),
             onDismissed: (direction) {
@@ -265,6 +266,7 @@ class _RssSubController extends GetxController {
                 color: Colors.white,
               ),
             ),
+            // 点击
             child: InkWell(
               child: ListTile(
                 title: Text('${data.showName} (${data.name})'),

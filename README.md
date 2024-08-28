@@ -18,6 +18,7 @@ MioFeed - Modern RSS reader
   - [x] 更新订阅
   - [x] 删除订阅
   - [x] 获取订阅
+  - [x] 时间排序
   - [ ] 主题功能
   - [ ] 订阅分组
 
