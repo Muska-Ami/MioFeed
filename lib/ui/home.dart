@@ -181,6 +181,11 @@ class _HomeController extends GetxController {
       // print('${b['item'].title} $bTime, ${a['item'].title} $aTime, RES: $result');
       return result;
     });
-    allParagraph.value = dataParagraph;
+    allParagraph.clear();
+    // 使用异步方法添加文章，避免大量文章导致UI卡顿
+    dataParagraph.forEach((item) async {
+      allParagraph.add(item);
+      allParagraph.refresh();
+    });
   }
 }
