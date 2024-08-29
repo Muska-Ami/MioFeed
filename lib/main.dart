@@ -2,21 +2,38 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miofeed/controllers/progressbar_controller.dart';
+import 'package:miofeed/storages/settings_storage.dart';
+import 'package:miofeed/tasks/task.dart';
 import 'package:miofeed/ui/home.dart';
 import 'package:miofeed/ui/settings.dart';
 import 'package:miofeed/ui/settings/render.dart';
-import 'package:miofeed/ui/settings/rss_sub.dart';
+import 'package:miofeed/ui/settings/rss_subscribe.dart';
 import 'package:miofeed/ui/settings/theme.dart';
-import 'package:miofeed/utils/rss/rss_cache.dart';
+import 'package:miofeed/storages/rss/rss_cache.dart';
 import 'package:miofeed/utils/shared_data.dart';
 
 const String title = "MioFeed";
+
+late final bool _useMonet;
+late final int _useThemeMode;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedData.init();
   await RssCache.readAllToRemCache();
+
+  await _initSelfConfig();
+  Task.register();
+
   runApp(const MyApp());
+}
+
+// 初始化一些配置项目
+_initSelfConfig() async {
+  final settings = SettingsStorage();
+
+  _useMonet = await settings.getThemeMonet() ?? true;
+  _useThemeMode = await settings.getThemeMode() ?? 0;
 }
 
 class MyApp extends StatelessWidget {
@@ -28,29 +45,35 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Task.doConfigure();
     Get.put(ProgressbarController());
+
+    // 处理主题模式
+    ThemeMode themeMode;
+    switch (_useThemeMode) {
+      case 1:
+        themeMode = ThemeMode.light;
+        break;
+      case 2:
+        themeMode = ThemeMode.dark;
+        break;
+      case 0:
+      default:
+        themeMode = ThemeMode.system;
+    }
+
     // Monet 取色
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
 
-        if (lightDynamic != null && darkDynamic != null) {
-          // On Android S+ devices, use the provided dynamic color scheme.
-          // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
+        if (_useMonet && lightDynamic != null && darkDynamic != null) {
+          // 从系统获取
           lightColorScheme = lightDynamic.harmonized();
-          // (Optional) Customize the scheme as desired. For example, one might
-          // want to use a brand color to override the dynamic [ColorScheme.secondary].
-          // lightColorScheme = lightColorScheme.copyWith(secondary: _defaultColorSeed);
-          // (Optional) If applicable, harmonize custom colors.
-          // lightCustomColors = lightCustomColors.harmonized(lightColorScheme);
-
-          // Repeat for the dark color scheme.
           darkColorScheme = darkDynamic.harmonized();
-          // darkColorScheme = darkColorScheme.copyWith(secondary: _defaultColorSeed);
-          // darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
         } else {
-          // Fallback
+          // 不支持或者禁用了 Monet 取色，Fallback
           lightColorScheme = ColorScheme.fromSeed(
             seedColor: _defaultColorSeed,
           );
@@ -72,11 +95,11 @@ class MyApp extends StatelessWidget {
             colorScheme: darkColorScheme,
             fontFamily: 'Microsoft YaHei',
           ),
-          themeMode: ThemeMode.system,
+          themeMode: themeMode,
           routes: {
             '/home': (context) => HomeUI(title: title),
             '/settings': (context) => SettingsUI(title: title),
-            '/settings/rss_sub': (context) =>
+            '/settings/rss_subscribe': (context) =>
                 const RssSubSettingUI(title: title),
             '/settings/theme': (context) => ThemeSettingUI(title: title),
             '/settings/render': (context) => RenderSettingUI(title: title),

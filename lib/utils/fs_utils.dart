@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class FsUtils {
-  // 异步函数，用于删除目录及其内容
+  /// 异步函数，用于删除目录及其内容
   static Future<void> deleteDirectory(Directory directory) async {
     // 如果目录存在
     if (await directory.exists()) {

@@ -26,6 +26,7 @@ if (flutterVersionName == null) {
 android {
     namespace = "moe.muska.ami.miofeed"
     compileSdk = flutter.compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -40,6 +41,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }

@@ -7,8 +7,8 @@ class SharedData {
   static late final String documentPath;
 
   static Future<void> _initPaths() async {
-    documentPath = (await getApplicationDocumentsDirectory()).path + '/MioFeed';
-    final dir = await Directory(documentPath);
+    documentPath = '${(await getApplicationDocumentsDirectory()).path}/MioFeed';
+    final dir = Directory(documentPath);
     if (!(await dir.exists())) await dir.create();
   }
 

@@ -1,5 +1,5 @@
 import 'package:miofeed/models/universal_feed.dart';
-import 'package:miofeed/utils/rss/rss_cache.dart';
+import 'package:miofeed/storages/rss/rss_cache.dart';
 
 class RssUtils {
   static List<Map<String, dynamic>> get allRssParagraph {

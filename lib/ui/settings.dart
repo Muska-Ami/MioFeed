@@ -36,7 +36,7 @@ class SettingsUI extends StatelessWidget {
               title: Text("订阅设置"),
             ),
             onTap: () async {
-              Get.toNamed('/settings/rss_sub');
+              Get.toNamed('/settings/rss_subscribe');
             },
           ),
           InkWell(

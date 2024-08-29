@@ -5,8 +5,8 @@ import 'package:miofeed/controllers/progressbar_controller.dart';
 import 'package:miofeed/models/rss.dart';
 import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/utils/network/get_rss.dart';
-import 'package:miofeed/utils/rss/rss_cache.dart';
-import 'package:miofeed/utils/rss/rss_storage.dart';
+import 'package:miofeed/storages/rss/rss_cache.dart';
+import 'package:miofeed/storages/rss/rss_storage.dart';
 import 'package:flutter/services.dart';
 
 class RssSubNewUI extends StatefulWidget {

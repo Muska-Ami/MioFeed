@@ -4,7 +4,7 @@ import 'package:dart_rss/dart_rss.dart';
 import 'package:miofeed/models/rss.dart';
 import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/utils/fs_utils.dart';
-import 'package:miofeed/utils/rss/rss_storage.dart';
+import 'package:miofeed/storages/rss/rss_storage.dart';
 import 'package:miofeed/utils/shared_data.dart';
 
 class RssCache {
