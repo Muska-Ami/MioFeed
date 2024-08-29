@@ -85,7 +85,10 @@ class ThemeSettingUI extends StatelessWidget {
                         },
                         child: Row(
                           children: [
-                            Text(_getThemeModeText(_ctr.themeMode.value)),
+                            Text(
+                              _getThemeModeText(_ctr.themeMode.value),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             Container(
                               margin: const EdgeInsets.only(left: 10),
                               child: const Icon(Icons.api),
