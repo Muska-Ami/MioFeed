@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:miofeed/controllers/navigator_controller.dart';
 import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/models/universal_item.dart';
+import 'package:miofeed/tasks/subscribe_update.dart';
 import 'package:miofeed/ui/paragraph.dart';
 import 'package:miofeed/utils/after_layout.dart';
 import 'package:miofeed/utils/paragraph_utils.dart';
@@ -26,6 +27,30 @@ class HomeUI extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              progressbar.start();
+              await SubscribeUpdateTask.run();
+              progressbar.finish();
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+          IconButton(
+            onPressed: () async {
+              Get.dialog(
+                const SimpleDialog(
+                  children: [
+                    Center(
+                      child: Text('Comming soon'),
+                    )
+                  ],
+                ),
+              );
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
         title: Text(title),
         bottom: PreferredSize(
           preferredSize: Size(MediaQuery.of(context).size.width, 3),

@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:background_fetch/background_fetch.dart';
-import 'package:miofeed/tasks/subscribe_update.dart';
+import 'package:miofeed/tasks/android_subscribe_update.dart';
+import 'package:miofeed/utils/task_scheduler.dart';
 
 class Task {
   static final _config = BackgroundFetchConfig(
@@ -16,12 +17,18 @@ class Task {
   );
 
   static Future<void> doConfigure() async {
-    int status = await BackgroundFetch.configure(
-      _config,
-      _callbackHandler,
-      _errorHandler,
-    );
-    print('[BackgroundFetch] configure success: $status');
+    if (Platform.isAndroid) {
+      int status = await BackgroundFetch.configure(
+        _config,
+        _callbackHandler,
+        _errorHandler,
+      );
+      print('[BackgroundFetch] configure success: $status');
+    } else if (Platform.isIOS) {
+
+    } else {
+      TaskScheduler.start();
+    }
   }
 
   static void _callbackHandler(String taskId) async {
@@ -41,7 +48,7 @@ class Task {
   static void register() {
     if (Platform.isAndroid) {
       BackgroundFetch.registerHeadlessTask(
-        SubscribeUpdateTask.backgroundFetchHeadlessTask,
+        AndroidSubscribeUpdateTask.backgroundFetchHeadlessTask,
       );
     }
   }

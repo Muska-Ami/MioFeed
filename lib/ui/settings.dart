@@ -57,6 +57,15 @@ class SettingsUI extends StatelessWidget {
               Get.toNamed('/settings/render');
             },
           ),
+          InkWell(
+            child: const ListTile(
+              leading: Icon(Icons.info),
+              title: Text("关于"),
+            ),
+            onTap: () async {
+              Get.toNamed('/about');
+            },
+          ),
         ],
       ),
       bottomNavigationBar: NavigationBarX().build(),

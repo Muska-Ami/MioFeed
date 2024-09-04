@@ -6,10 +6,12 @@ import 'package:miofeed/storages/settings_storage.dart';
 import 'package:miofeed/tasks/task.dart';
 import 'package:miofeed/ui/home.dart';
 import 'package:miofeed/ui/settings.dart';
+import 'package:miofeed/ui/settings/about.dart';
 import 'package:miofeed/ui/settings/render.dart';
 import 'package:miofeed/ui/settings/rss_subscribe.dart';
 import 'package:miofeed/ui/settings/theme.dart';
 import 'package:miofeed/storages/rss/rss_cache.dart';
+import 'package:miofeed/utils/app_info.dart';
 import 'package:miofeed/utils/shared_data.dart';
 
 const String title = "MioFeed";
@@ -21,6 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedData.init();
   await RssCache.readAllToRemCache();
+  await AppInfo.init();
 
   await _initSelfConfig();
   Task.register();
@@ -103,6 +106,7 @@ class MyApp extends StatelessWidget {
                 const RssSubSettingUI(title: title),
             '/settings/theme': (context) => ThemeSettingUI(title: title),
             '/settings/render': (context) => RenderSettingUI(title: title),
+            '/about': (context) => AboutUI(title: title),
           },
           home: HomeUI(title: title),
         );

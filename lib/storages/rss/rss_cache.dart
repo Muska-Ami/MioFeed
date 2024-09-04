@@ -47,6 +47,13 @@ class RssCache {
         'data': feed,
       });
   static Future<void> removeMemCache(rss) async => rssList.remove(rss);
+  static Future<void> removeMemCacheBySubName(String name) async {
+    late final Map<String, dynamic> res;
+    for (var item in rssList) {
+      if (item['sub'].name == name) res = item;
+    }
+    rssList.remove(res);
+  }
   static get rssMemCache => rssList;
 
   static Future<void> readAllToRemCache() async {
