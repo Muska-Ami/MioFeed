@@ -68,7 +68,7 @@ class SettingsUI extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 }

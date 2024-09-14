@@ -74,7 +74,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 }

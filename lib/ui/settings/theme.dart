@@ -120,7 +120,7 @@ class ThemeSettingUI extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 

@@ -72,7 +72,7 @@ class AboutUI extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 }

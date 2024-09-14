@@ -27,7 +27,7 @@ class RenderSettingUI extends StatelessWidget {
       body: const Center(
         child: Text('Coming soon'),
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 }

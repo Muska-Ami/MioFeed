@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 
 import '../../controllers/navigator_controller.dart';
 
-class NavigationBarX {
-  final NavigatorController nctr = Get.put(NavigatorController());
+  final NavigatorController _nCtr = Get.put(NavigatorController());
 
-  build() => NavigationBar(
-        selectedIndex: nctr.currentPage.value,
+  navigationBar() => NavigationBar(
+        selectedIndex: _nCtr.currentPage.value,
         onDestinationSelected: (index) async {
-          nctr.currentPage.value = index;
-          nctr.subCurrentPage.value = 0;
+          _nCtr.currentPage.value = index;
+          _nCtr.subCurrentPage.value = 0;
           switch (index) {
             case 0:
               // 首页
@@ -26,4 +25,3 @@ class NavigationBarX {
           NavigationDestination(icon: Icon(Icons.settings), label: "设置"),
         ],
       );
-}

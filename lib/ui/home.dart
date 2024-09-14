@@ -4,6 +4,7 @@ import 'package:miofeed/controllers/navigator_controller.dart';
 import 'package:miofeed/models/universal_feed.dart';
 import 'package:miofeed/models/universal_item.dart';
 import 'package:miofeed/tasks/subscribe_update.dart';
+import 'package:miofeed/ui/models/search_dialog.dart';
 import 'package:miofeed/ui/paragraph.dart';
 import 'package:miofeed/utils/after_layout.dart';
 import 'package:miofeed/utils/paragraph_utils.dart';
@@ -38,15 +39,7 @@ class HomeUI extends StatelessWidget {
           ),
           IconButton(
             onPressed: () async {
-              Get.dialog(
-                const SimpleDialog(
-                  children: [
-                    Center(
-                      child: Text('Comming soon'),
-                    )
-                  ],
-                ),
-              );
+              Get.dialog(searchDialog(context));
             },
             icon: const Icon(Icons.search),
           )
@@ -161,7 +154,7 @@ class HomeUI extends StatelessWidget {
                 ),
         ),
       ),
-      bottomNavigationBar: NavigationBarX().build(),
+      bottomNavigationBar: navigationBar(),
     );
   }
 
