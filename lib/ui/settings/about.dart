@@ -12,7 +12,7 @@ class AboutUI extends StatelessWidget {
 
   final String title;
 
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
   @override
   Widget build(BuildContext context) {
     int ic = 0;
@@ -25,7 +25,7 @@ class AboutUI extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),

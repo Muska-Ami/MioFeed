@@ -12,7 +12,7 @@ class ThemeSettingUI extends StatelessWidget {
   final String title;
 
   final _ThemeSettingsController _ctr = Get.put(_ThemeSettingsController());
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ThemeSettingUI extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),
@@ -145,17 +145,21 @@ class _ThemeSettingsController extends GetxController {
   Rx<_ThemeMode> themeMode = _ThemeMode.light.obs;
 
   load() async {
+    await _initValues();
+  }
+
+  _initValues() async {
     themeMonet.value = await _settings.getThemeMonet() ?? true;
     switch (await _settings.getThemeMode()) {
-      case 1:
-        themeMode.value = _ThemeMode.light;
-        break;
-      case 2:
-        themeMode.value = _ThemeMode.dark;
-        break;
-      case 0:
-      default:
-        themeMode.value = _ThemeMode.system;
+    case 1:
+    themeMode.value = _ThemeMode.light;
+    break;
+    case 2:
+    themeMode.value = _ThemeMode.dark;
+    break;
+    case 0:
+    default:
+    themeMode.value = _ThemeMode.system;
     }
   }
 }

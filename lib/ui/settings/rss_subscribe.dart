@@ -27,7 +27,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
   final String title;
 
   final _RssSubscribeSettingsController _ctr = Get.put(_RssSubscribeSettingsController());
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _RssSubSettingState extends State<RssSubSettingUI> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),

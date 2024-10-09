@@ -19,7 +19,7 @@ class HomeUI extends StatelessWidget {
   final String title;
 
   final NavigatorController nctr = Get.put(NavigatorController());
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,9 @@ class HomeUI extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              progressbar.start();
+              _progressbar.start();
               await SubscribeUpdateTask.run();
-              progressbar.finish();
+              _progressbar.finish();
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -50,7 +50,7 @@ class HomeUI extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),

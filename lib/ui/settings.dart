@@ -11,7 +11,7 @@ class SettingsUI extends StatelessWidget {
   final String title;
 
   final NavigatorController nctr = Get.put(NavigatorController());
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SettingsUI extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),

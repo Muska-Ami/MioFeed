@@ -44,7 +44,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
   final String? link;
   int type;
 
-  final ProgressbarController progressbar = Get.find();
+  final ProgressbarController _progressbar = Get.find();
 
   TextEditingController rssSubLinkTextController = TextEditingController();
   TextEditingController rssSubNameController = TextEditingController();
@@ -71,7 +71,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 3,
-            child: Obx(() => progressbar.widget.value),
+            child: Obx(() => _progressbar.widget.value),
           ),
         ),
       ),
@@ -198,7 +198,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 );
                 return;
               }
-              progressbar.start();
+              _progressbar.start();
               // 最终数据
               final rss = RSS(
                 name: name ?? rssSubNameController.text,
@@ -226,7 +226,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 }
                 print(e);
                 print(s);
-                progressbar.finish();
+                _progressbar.finish();
                 return;
               }
               //print(res);
@@ -249,7 +249,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 );
                 print(e);
                 print(s);
-                progressbar.finish();
+                _progressbar.finish();
                 return;
               }
               // print(parsed);
@@ -264,7 +264,7 @@ class _RssSubNewState extends State<RssSubNewUI> {
                 date: parsed.date,
                 item: parsed.item,
               ));
-              progressbar.finish();
+              _progressbar.finish();
               Get.back(result: true);
               // Get.close(0);
               // if (twiceClose) Get.close(0);
